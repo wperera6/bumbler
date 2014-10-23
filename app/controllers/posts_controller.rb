@@ -20,25 +20,25 @@ class PostsController < ApplicationController
   end
 
   # POST /posts
-  # POST /posts.json
+  
   def create
     @post = Post.new(post_params)
 
   
     if @post.save
-        fredirect_to @post, notice: 'Post was successfully created.'
+        redirect_to @post, notice: 'Post was successfully created.'
     else
         render :new
     end
+  end
     
 
   # PATCH/PUT /posts/1
   def update
-    
-      if @post.update(post_params)
+    if @post.update(post_params)
         redirect_to @post, notice: 'Post was successfully updated.' 
       else
-        render :edit 
+        render action: 'edit' 
       end
   end
 
@@ -60,4 +60,4 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content)
     end
-end
+
